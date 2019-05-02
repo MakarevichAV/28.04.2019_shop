@@ -1,21 +1,59 @@
 <?php
     include($_SERVER['DOCUMENT_ROOT'].'/php/connect.php');
-    $qr_cats = "SELECT * FROM `categories` WHERE `parent_category` = {$_GET['id']}";
-    $cats = mysqli_query($db, $qr_cats);
-    $template = [];
-    while ( $row_cats = mysqli_fetch_assoc($cats) ) {
-        $template['cats'][] = $row_cats;
-    }
 
     // Пункты меню из базы данных
     $qr_parent = "SELECT * FROM `categories` WHERE `parent_category` = 0";
     $cats_parent = mysqli_query($db, $qr_parent);
+    // $template = [];
     while ( $row_cats_parent = mysqli_fetch_assoc($cats_parent) ) {
         $template['cats_parent'][] = $row_cats_parent;
     }
 
+    // Берем количество полученных строк, в дальнейшем будем сравнивать с этим числом передаваемое число в ГЕТе (строка *)
+    $num_cats_parent = mysqli_num_rows($cats_parent);
+    // print_r($num_cats_parent);
+
+    // пустая переменная, будем заносить в нее значение родительской категории
+    $cat_id = '';
+
+    // Если существует элемент массива id (т е если он был передан)
+    if ( isset($_GET['id']) ) {
+        // то проверяем его на пустоту
+        // если непустой
+        if ( !empty($_GET['id']) ) {
+
+            // то проверяем чтобы число было не больше количества родительских категорий
+            if ($_GET['id'] > $num_cats_parent) {   // если больше  // *
+                // то присваиваем переменной значение по умолчанию 1 (отобразятся товары для мужчин)
+                $cat_id = 1;
+            } else {
+                // иначе присваиваем значение передаваемого id переменной 
+                $cat_id = $_GET['id'];
+            }
+
+        } else {
+            // иначе присваиваем значение передаваемого id переменной 
+            $cat_id = 1;
+        }
+
+    } else {
+        // иначе присваиваем значение передаваемого id переменной 
+        $cat_id = 1;
+    }
+
+    // Выбираем строку из таблицы категорий где родительская категория равна переданной в массив ГЕТ
+    $qr_cats = "SELECT * FROM `categories` WHERE `parent_category` = $cat_id";
+    $cats = mysqli_query($db, $qr_cats);
+    while ( $row_cats = mysqli_fetch_assoc($cats) ) {
+        $template['cats'][] = $row_cats;
+    }
+
+    // echo '<pre>';
+    // print_r($template);
+    // echo '</pre>';
+
     // Выбираем строку с родительской категорией товаров, в зависимости от того, какой id был передан в массиве $_GET
-    $qr_cat_parent = "SELECT * FROM `categories` WHERE `id` = {$_GET['id']}";
+    $qr_cat_parent = "SELECT * FROM `categories` WHERE `id` = $cat_id";
     $result_parent = mysqli_query($db, $qr_cat_parent);
     $row_parent = mysqli_fetch_assoc($result_parent);
 ?>
@@ -63,7 +101,7 @@
             <a href="#" class="bread-crumbs-item">Главная</a> /
             <a href="/pages/catalog.php?id=<?=$_GET['id']?>" class="bread-crumbs-item"><?=$row_parent['name']?></a>
         </div>
-        <div class="content">
+        <div class="content" id="catalog">
             <h1 class="head1"><?=$row_parent['name']?></h1>
             <p class="subhead">Все товары</p>
         </div>
@@ -73,7 +111,10 @@
                 <div class="select-item">
 
                     <?php foreach ($template['cats'] as $key => $val):?>
-                        <p class="option"><?=$val['name']?></p>
+                        <label class="option">
+                            <input type="radio" name="subcat" value="<?=$val['id']?>" class="subcat">
+                            <?=$val['name']?>
+                        </label>
                     <?php endforeach; ?>  
 
                 </div>

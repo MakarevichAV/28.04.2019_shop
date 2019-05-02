@@ -7,7 +7,7 @@ class Product {
         this.el = document.querySelector('.goods');
     }
     // Действия с данными  // Методы
-    createCard() {
+        createCard() {
         let card = document.createElement('div');
         card.classList.add('product');
         card.innerHTML = `
@@ -21,21 +21,36 @@ class Product {
 
 class Catalog {
     constructor () {
-
+        this.el = document.querySelector('.goods');
     }
-    renderCatalog() {
+    cleanCatalog() {
+        this.el.innerHTML = '';
+    }
+    renderCatalog(subCatId) {
+
+        this.cleanCatalog();
 
         // 1. Создаем пустой объект
         let xhr = new XMLHttpRequest;
 
+        // проверка есть ли GET параметры в строке
+        // тернарный оператор (вместо if else) 
+        let catID = (window.location.search == '') ? '?id=1' : window.location.search ;
+
+
+        if (subCatId != undefined) {
+            catID = `?id=${subCatId}`;
+        }
+
         // 2. Наполняем его данными для отправки
-        xhr.open('GET', '/handlers/catalogHandler.php');
+        xhr.open('GET', `/handlers/catalogHandler.php${catID}`);
 
         // 3. Отправляем данные
         xhr.send();
 
         // 4. Ждем ответ от сервера
         xhr.addEventListener('load', function () {
+        
             let data = JSON.parse(xhr.responseText);
 
             // выводим карточки товаров на основании полученныч данных
@@ -43,34 +58,29 @@ class Catalog {
                 let newCard = new Product(value.name, value.pic, value.price);
                 newCard.createCard();
             } );
-            // console.log(data);
+    
         });
 
-        // let catalogItems = [
-        //     {
-        //         name : 'Куртка синяя',
-        //         pic : '1.jpg',
-        //         price : '5 200'
-        //     },
-        //     {
-        //         name : 'Куртка оранжевая',
-        //         pic : '2.jpg',
-        //         price : '3 200'
-        //     }
-        // ];
-
-        // data.forEach( function (value, index) {
-        //     let newCard = new Product(value.name, value.pic, value.price);
-        //     newCard.createCard();
-        // } );
     }
 }
 
 let catalog = new Catalog();
 catalog.renderCatalog();
 
-// let newCard = new Product('Куртка синяя', '1.jpg', '5 200');
-// newCard.createCard();
 
-// newCard = new Product('Куртка оранжевая', '2.jpg', '3 200');
-// newCard.createCard();
+let catalogSelect = document.querySelectorAll('.subcat');
+
+console.log(catalogSelect);
+catalogSelect.forEach( function (v, i) {
+    v.addEventListener('change', function () {
+        // alert('подкатегория выбрана');
+        
+        // получаем значение выбранного инпута radio
+        let selectValue = v.value;
+        
+        // создаем новый экземпляр объекта Catalog 
+        let catalog = new Catalog();
+        catalog.renderCatalog( selectValue );
+
+    });
+} );

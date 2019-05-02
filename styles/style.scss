@@ -509,9 +509,15 @@ body {
             z-index: 1;
             .option {
                 line-height: 40px;
+                text-decoration: none;
+                color: #7e7e7e;
+                display: block;
                 &:hover {
                     color: #111111;
                     background: rgba(230, 230, 230, 0.3);
+                }
+                [type="radio"] {
+                    display: none;
                 }
             }
         }

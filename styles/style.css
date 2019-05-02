@@ -559,11 +559,18 @@ body {
 
 .filter .select .select-item .option {
   line-height: 40px;
+  text-decoration: none;
+  color: #7e7e7e;
+  display: block;
 }
 
 .filter .select .select-item .option:hover {
   color: #111111;
   background: rgba(230, 230, 230, 0.3);
+}
+
+.filter .select .select-item .option [type="radio"] {
+  display: none;
 }
 
 .none {
