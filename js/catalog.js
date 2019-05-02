@@ -26,9 +26,18 @@ class Catalog {
     cleanCatalog() {
         this.el.innerHTML = '';
     }
+    preloaderOn() {
+        let preloader = document.createElement('div');
+        preloader.classList.add('preloader');
+        this.el.appendChild(preloader);
+    }
+    preloaderOff() {
+        this.cleanCatalog();
+    }
     renderCatalog(subCatId) {
 
         this.cleanCatalog();
+        this.preloaderOn();
 
         // 1. Создаем пустой объект
         let xhr = new XMLHttpRequest;
@@ -48,8 +57,10 @@ class Catalog {
         // 3. Отправляем данные
         xhr.send();
 
-        // 4. Ждем ответ от сервера
-        xhr.addEventListener('load', function () {
+        // 4. Ждем ответ от сервера   // () => для подтягивания контекста, чтобы работал this внутри обработчика
+        xhr.addEventListener('load', () => {
+
+            this.preloaderOff();
         
             let data = JSON.parse(xhr.responseText);
 
@@ -70,7 +81,7 @@ catalog.renderCatalog();
 
 let catalogSelect = document.querySelectorAll('.subcat');
 
-console.log(catalogSelect);
+// console.log(catalogSelect);
 catalogSelect.forEach( function (v, i) {
     v.addEventListener('change', function () {
         // alert('подкатегория выбрана');

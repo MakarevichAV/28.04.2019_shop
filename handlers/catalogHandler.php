@@ -2,6 +2,7 @@
     include ($_SERVER['DOCUMENT_ROOT'].'/php/connect.php');
     
     $cat = $_GET['id'];
+    sleep(1);
 
     // Ищем дочерние категории на основании переданной родительской категории
     $query = "SELECT * FROM `categories` WHERE `parent_category` = $cat";

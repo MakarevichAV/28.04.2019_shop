@@ -773,6 +773,13 @@ body {
   }
 }
 
+.preloader {
+  width: 150px;
+  height: 50px;
+  margin: 40px auto;
+  background: url(../images/icon/preload.gif) no-repeat center center/contain;
+}
+
 @media (max-width: 720px) {
   .header .menu .logo {
     margin-right: 10px;
