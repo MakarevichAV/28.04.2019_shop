@@ -1,18 +1,19 @@
 class Product {
     // Данные
-    constructor (productName, productPic, productPrice) {
+    constructor (productName, productPic, productPrice, productID) {
         this.name = productName;
         this.pic = productPic;
         this.price = productPrice;
+        this.id = productID;
         this.el = document.querySelector('.goods');
     }
     // Действия с данными  // Методы
-        createCard() {
+    createCard() {
         let card = document.createElement('div');
         card.classList.add('product');
         card.innerHTML = `
-            <div class="product-img" style="background-image: url(/images/catalog/${this.pic})"></div>
-            <p class="product-name">${this.name}</p>
+            <a href="/pages/details.php?id=${this.id}" class="product-img" style="background-image: url(/images/catalog/${this.pic})"></a>
+            <a href="/pages/details.php?id=${this.id}" class="product-name">${this.name}</a>
             <p class="price"><span>${this.price}</span> руб.</p>
         `;
         this.el.appendChild(card);
@@ -66,7 +67,7 @@ class Catalog {
 
             // выводим карточки товаров на основании полученныч данных
             data.forEach( function (value, index) {
-                let newCard = new Product(value.name, value.pic, value.price);
+                let newCard = new Product(value.name, value.pic, value.price, value.id);
                 newCard.createCard();
             } );
     
