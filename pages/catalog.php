@@ -52,14 +52,16 @@
     $qr_cat_parent = "SELECT * FROM `categories` WHERE `id` = $cat_id";
     $result_parent = mysqli_query($db, $qr_cat_parent);
     $row_parent = mysqli_fetch_assoc($result_parent);
+
+    // print_r($row_parent);
 ?>
 
         <?php
             include($_SERVER['DOCUMENT_ROOT'].'/modules/head.php');
         ?>
         <div class="bread-crumbs">
-            <a href="#" class="bread-crumbs-item">Главная</a> /
-            <a href="/pages/catalog.php?id=<?=0?>" class="bread-crumbs-item"><?=$row_parent['name']?></a>
+            <a href="/index.php" class="bread-crumbs-item">Главная</a> /
+            <a href="/pages/catalog.php?id=<?=$row_parent['id']?>" class="bread-crumbs-item"><?=$row_parent['name']?></a>
         </div>
         <div class="content" id="catalog">
             <h1 class="head1"><?=$row_parent['name']?></h1>

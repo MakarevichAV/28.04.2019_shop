@@ -35,12 +35,19 @@
     // Подключение шапки сайта
     include($_SERVER['DOCUMENT_ROOT'].'/modules/head.php');
 ?>
+
 <div class="bread-crumbs">
-    <a href="#" class="bread-crumbs-item">Главная</a> /
-    <a href="/pages/catalog.php?id=0" class="bread-crumbs-item"><?=$rowParent['name']?></a> /
+    <a href="/index.php" class="bread-crumbs-item">Главная</a> /
+    <a href="/pages/catalog.php?id=<?=$rowCatID['parent_category']?>" class="bread-crumbs-item"><?=$rowParent['name']?></a> /
     <a href="/pages/catalog.php?id=<?=$rowCatID['id']?>" class="bread-crumbs-item"><?=$rowCatID['name']?></a> /
-    <a href="/pages/details.php?id=0" class="bread-crumbs-item"><?=$rowProduct['name']?></a>
+    <a href="#" class="bread-crumbs-item"><?=$rowProduct['name']?></a>
 </div>
+
+<div class="picture margin-bottom20"" style="background-image: url(/images/catalog/<?=$rowProduct['pic']?>)"></div>
+<h1 class="head1"><?=$rowProduct['name']?></h1>
+<p class="article margin-bottom20">Артикул: <?=$rowProduct['article']?></p>
+<p class="subhead"><?=$rowProduct['price']?> руб.</p>
+<p class="description margin-bottom20"><?=$rowProduct['description']?></p>
 
 <?php
     echo '<pre>';
