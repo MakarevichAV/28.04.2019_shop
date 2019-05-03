@@ -43,17 +43,29 @@
     <a href="#" class="bread-crumbs-item"><?=$rowProduct['name']?></a>
 </div>
 
-<div class="picture margin-bottom20"" style="background-image: url(/images/catalog/<?=$rowProduct['pic']?>)"></div>
-<h1 class="head1"><?=$rowProduct['name']?></h1>
+<div class="picture margin-bottom20" style="background-image: url(/images/catalog/<?=$rowProduct['pic']?>)"></div>
+<h1 class="head1 margin-bottom10"><?=$rowProduct['name']?></h1>
 <p class="article margin-bottom20">Артикул: <?=$rowProduct['article']?></p>
-<p class="subhead"><?=$rowProduct['price']?> руб.</p>
+<p class="price margin-bottom20"><?=$rowProduct['price']?> руб.</p>
 <p class="description margin-bottom20"><?=$rowProduct['description']?></p>
+<p class="size margin-bottom10">РАЗМЕР</p>
+<div class="size-range margin-bottom40">
+    Здесь будут выводиться размеры из БД (div или скорее radio c div-ом, обернутые в label, через foreach, class="size-value")
+    <!-- <div class="size-value">39</div>
+    <div class="size-value">40</div>
+    <div class="size-value">42</div>
+    <div class="size-value">44</div> -->
+</div>
+
+<!-- кнопка для добавления товара в корзину  /  пока сделанная ссылкой -->
+<a href="#" class="submit margin-bottom60">Добавить в корзину</a>
+
 
 <?php
-    echo '<pre>';
-    print_r($rowProduct);
-    print_r($rowCatID);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($rowProduct);
+    // print_r($rowCatID);
+    // echo '</pre>';
 ?>
 
 <?php
