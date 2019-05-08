@@ -76,9 +76,9 @@
 
 
 <?php
-    // echo '<pre>';
-    // print_r($sizes);
-    // echo '</pre>';
+    echo '<pre>';
+    print_r($sizes);
+    echo '</pre>';
 ?>
 
 <?php
