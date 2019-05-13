@@ -72,13 +72,13 @@
 </div>
 
 <!-- кнопка для добавления товара в корзину  /  пока сделанная ссылкой -->
-<a href="#" class="submit margin-bottom80">Добавить в корзину</a>
+<a href="#" class="submit bg-orange txt-color-white margin-bottom80">Добавить в корзину</a>
 
 
 <?php
-    echo '<pre>';
-    print_r($sizes);
-    echo '</pre>';
+    // echo '<pre>';
+    // print_r($sizes);
+    // echo '</pre>';
 ?>
 
 <?php

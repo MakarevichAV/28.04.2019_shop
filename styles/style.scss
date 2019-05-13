@@ -455,7 +455,7 @@ body {
         padding: 0 6px;
     }
 }
-.head1 {
+.head1, .head2 {
     font-size: 28px;
     font-family: Arial, Helvetica, sans-serif;
     color: #323232;
@@ -463,6 +463,9 @@ body {
     text-align: center;
     font-weight: normal;
     margin: 0;
+}
+.font-size-40 {
+    font-size: 40px;
 }
 .subhead {
     font-size: 15px;
@@ -472,6 +475,10 @@ body {
     text-align: center;
     font-style: italic;
     margin-bottom: 60px;
+}
+
+.weight-norm {
+    font-weight: normal;
 }
 .price {
     font-size: 15px;
@@ -539,23 +546,39 @@ body {
 }
 
 .submit {
-    background: #F68235;
     text-transform: uppercase;
     text-decoration: none;
     padding: 20px;
     max-width: 200px;
     font-size: 15px;
     font-family: Arial, Helvetica, sans-serif;
-    color: white;
     margin: 0 auto;
     display: block;
     text-align: center;
+}
+.bg-orange {
+    background: #F68235;
+}
+.txt-color-white {
+    color: white;
+}
+.border-1px-gray {
+    border: 1px solid #7E7E7E;
+}
+.txt-color-gray {
+    color: #7E7E7E;
+}
+.margin-top-80 {
+    margin-top: 80px; 
 }
 .margin-bottom60 {
     margin-bottom: 60px;
 }
 .margin-bottom80 {
     margin-bottom: 80px;
+}
+.margin-bottom150 {
+    margin-bottom: 150px;
 }
 
 .filter {
@@ -752,6 +775,141 @@ body {
     background: no-repeat center center / contain;
 }
 
+// работа с grid версткой
+.grid {
+    display: grid;
+    grid-template-rows: 33.3333% 33.3333% 33.3333%;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-areas:
+    "product1 descript1 product2 descript2"
+    "product1 product3 descript3 product4"
+    "product5 descript4 product6 product4";
+}
+
+#block1 {
+    grid-area: product1;
+    background: url(../images/1.jpg) no-repeat center center / cover;
+}
+#block2 {
+    grid-area: descript1;
+    background: #bbbbbb;
+}
+#block3 {
+    grid-area: product2;
+    background: url(../images/3.jpg) no-repeat center center / cover;
+}
+#block4 {
+    grid-area: descript2;
+    background: #606060;
+}
+#block5 {
+    grid-area: product3;
+    background: url(../images/2.jpg) no-repeat center center / cover;
+}
+#block6 {
+    grid-area: descript3;
+    background: #bbbbbb;
+}
+#block7 {
+    grid-area: product4;
+    background: url(../images/4.jpg) no-repeat center center / cover;
+}
+#block8 {
+    grid-area: product5;
+    background: url(../images/5.jpg) no-repeat center center / cover;
+}
+#block9 {
+    grid-area: descript4;
+    background: #606060;
+}
+#block10 {
+    grid-area: product6;
+    background: url(../images/6.jpg) no-repeat center left / cover;
+}
+.grid-elem, .double-grid-elem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .description {
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        .important {
+            height: 22px;;
+            width: 100%;
+            background: url(../images/icon/important.png) no-repeat center center / contain;
+        }
+        .arrow {
+            height: 12px;;
+            width: 100%;
+            background: url(../images/icon/arrow.png) no-repeat center center / contain;
+        }
+        .descript-text {
+            color: white;
+        }
+    }
+}
+.blackout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.email {
+    max-width: 610px;
+    margin: 0 auto;
+    font-size: 14px;
+    display: flex;
+    [type="text"] {
+        padding: 0 10px;
+        box-sizing: border-box;
+        flex-grow: 1;
+        border: 1px solid #959595;
+        border-right: none;
+    }
+    [type="submit"] {
+        background: #f68236;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+    input {
+        height: 45px;
+        outline: none;
+    }
+}
+
+.margin-bottom90 {
+    margin-bottom: 90px;
+}
+.margin-bottom16 {
+    margin-bottom: 16px;
+}
+.font-size22 {
+    font-size: 22px;
+}
+.font-size16 {
+    font-size: 16px;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+.italic {
+    font-style: italic;
+}
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 @media (max-width: 800px) {
     .account {
         display: block !important;
@@ -770,6 +928,24 @@ body {
             padding: 0;
             padding-bottom: 30px;
         }
+    }
+    .grid {
+        display: grid;
+        grid-template-rows: 16.6666% 16.6666% 16.6666% 16.6666% 16.6666% 16.6666%;
+        grid-template-columns: 50% 50%;
+        grid-template-areas:
+        "product1 descript1"
+        "product1 product3"
+        "product5 descript4"
+        "product2 descript2"
+        "descript3 product4"
+        "product6 product4";
+    }
+    .font-size-40 {
+        font-size: 30px;
+    }
+    .margin-top-80 {
+        margin-top: 40px;
     }
 }
 
