@@ -12,7 +12,7 @@
 
 <h1 class="head1 font-size-40 margin-bottom10 margin-top-80">Новые поступления весны</h1>
 <p class="subhead weight-norm">Мы подготовили для Вас лучшие новинки сезона</p>
-<a href="#" class="submit border-1px-gray txt-color-gray margin-bottom80">Посмотреть ноавинки</a>
+<a href="#" class="submit border-1px-gray txt-color-gray margin-bottom80">Посмотреть новинки</a>
 
 <div class="grid margin-bottom150">
     <div id="block1" class="double-grid-elem">

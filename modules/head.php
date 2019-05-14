@@ -11,7 +11,7 @@
     <div class="wrapper padding30">
         <div class="header">
             <div class="menu">
-                <a href="#" class="logo margin-right"></a>
+                <a href="/" class="logo margin-right"></a>
                 <div class="menu-button">
                     <div class="line"></div>
                     <div class="line"></div>
@@ -24,7 +24,7 @@
                     <!-- <a href="#" class="item">Женщинам</a>
                     <a href="#" class="item">Мужчинам</a>
                     <a href="#" class="item">Детям</a> -->
-                    <a href="#" class="item">Новинки</a>
+                    <a href="/pages/new.php" class="item">Новинки</a>
                     <a href="#" class="item">О нас</a>
                 </div>
             </div>
