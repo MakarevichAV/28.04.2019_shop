@@ -2,7 +2,27 @@
     include ($_SERVER['DOCUMENT_ROOT'].'/php/connect.php');
     
     $cat = $_GET['id'];
-    sleep(1);  // имитация загрузки каталога
+
+    $currentPage = $_GET['page'];
+    
+    $itemsOnPage = 4;
+
+    // sleep(1);  // имитация загрузки каталога
+
+    // Массив товаров
+    $goods_array = [
+        'items' => [
+
+        ],
+        'pagination' => [
+            'allPages' => 0,
+            'currentPage' => $currentPage
+        ]
+
+    ];
+
+    $maxItems = $currentPage * $itemsOnPage;
+    $minItems = $currentPage * $itemsOnPage - $itemsOnPage;
 
     // Ищем дочерние категории на основании переданной родительской категории
     $query = "SELECT * FROM `categories` WHERE `parent_category` = $cat";
@@ -27,12 +47,31 @@
         $qr = "SELECT * FROM `catalog` WHERE `category_id` IN ($catsLine)";
         $goods = mysqli_query($db, $qr);
 
+        $countRows = mysqli_num_rows($goods);                     // количество строчек с товарами
+        $countRows = ceil($countRows / $itemsOnPage);             // делим на колво отображаемых и округляем в большую 
+        $goods_array['pagination']['allPages'] = $countRows;      // записываем в массив количество кубиков
+
+        // Поиск только требуемых товаров
+        $qr = "SELECT * FROM `catalog` WHERE `category_id` IN ($catsLine) LIMIT $minItems, $itemsOnPage";
+        $goods = mysqli_query($db, $qr);
+        
+
         //echo mysqli_num_rows($goods);  // кол-во строчек
 
-        $goods_array = [];
         while ( $row = mysqli_fetch_assoc($goods) ) {
-            array_push( $goods_array, $row );
+            array_push( $goods_array['items'], $row );
         }
+
+        // $residue = count($goods_array['items']) % 4;   // остаток от деления кол-ва товаров на количество отображаемых товаров
+        // $allPages = count($goods_array['items']) / 4;  // количество кубиков (кличество страниц по пять товаров без остатка)
+        // if ( $residue = 0 ) {  // если остаток равен 0 
+        //     $goods_array['pagination']['allPages'] = $allPages; // то записываем в массив количество кубиков
+        // } else {               // а если не равно 0, т е остаток есть
+        //     $goods_array['pagination']['allPages'] = $allPages + 1;  // то записываем в массив кол-во кубиков + 1
+        // }
+        
+        // array_push( $goods_array['pagination']['allPages'], count($goods_array['items']) );
+        
 
         // Конвертация для JS
         // JSON - JS Object Notation - Формат для отправки данных
@@ -44,11 +83,25 @@
         $query = "SELECT * FROM `catalog` WHERE `category_id` = $cat";
         $goods = mysqli_query($db, $query);
 
-        $goods_array = [];
+        $countRows = mysqli_num_rows($goods);                     // количество строчек с товарами
+        $countRows = ceil($countRows / $itemsOnPage);             // делим на колво отображаемых и округляем в большую 
+        $goods_array['pagination']['allPages'] = $countRows;      // записываем в массив количество кубиков
+
+        // Поиск только требуемых товаров
+        $qr = "SELECT * FROM `catalog` WHERE `category_id` = $cat LIMIT $minItems, $itemsOnPage";
+        $goods = mysqli_query($db, $qr);
 
         while ( $row = mysqli_fetch_assoc($goods) ) {
-            $goods_array[] = $row;
+            $goods_array['items'][] = $row;
         }
+
+        // $residue = count($goods_array['items']) % 5;   // остаток от деления кол-ва товаров на количество отображаемых товаров
+        // $allPages = count($goods_array['items']) / 5;  // количество кубиков (кличество страниц по пять товаров без остатка)
+        // if ( $residue = 0 ) {  // если остаток равен 0 
+        //     $goods_array['pagination']['allPages'] = $allPages; // то записываем в массив количество кубиков
+        // } else {               // а если не равно 0, т е остаток есть
+        //     $goods_array['pagination']['allPages'] = $allPages + 1;  // то записываем в массив кол-во кубиков + 1
+        // }
 
         echo json_encode($goods_array);
     }

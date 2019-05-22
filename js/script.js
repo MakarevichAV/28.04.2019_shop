@@ -71,4 +71,3 @@ $(window).resize( function () {                       // при изменени
     $('.grid-elem').height( $('.grid-elem').width()); // та же самая зависимость
 } );
 
-// console.log(gridElem);

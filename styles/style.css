@@ -602,6 +602,18 @@ body {
   text-align: center;
 }
 
+.font-size {
+  font-size: 10px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.padding10 {
+  padding: 10px;
+}
+
 .bg-orange {
   background: #F68235;
 }
@@ -915,7 +927,7 @@ body {
       grid-template-rows: 33.3333% 33.3333% 33.3333%;
   -ms-grid-columns: 25% 25% 25% 25%;
       grid-template-columns: 25% 25% 25% 25%;
-      grid-template-areas: "product1 descript1 product2 descript2" "product1 product3 descript3 product4" "product5 descript4 product6 product4";
+      grid-template-areas: "product1 descript1 product2 descript2" "product1 product3 descript3 product4" "product5 descript4 product6 product4";
 }
 
 #block1 {
@@ -1135,7 +1147,7 @@ body {
         grid-template-rows: 16.6666% 16.6666% 16.6666% 16.6666% 16.6666% 16.6666%;
     -ms-grid-columns: 50% 50%;
         grid-template-columns: 50% 50%;
-        grid-template-areas: "product1 descript1" "product1 product3" "product5 descript4" "product2 descript2" "descript3 product4" "product6 product4";
+        grid-template-areas: "product1 descript1" "product1 product3" "product5 descript4" "product2 descript2" "descript3 product4" "product6 product4";
   }
   .font-size-40 {
     font-size: 30px;

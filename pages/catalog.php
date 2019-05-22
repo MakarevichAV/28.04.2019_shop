@@ -77,7 +77,7 @@
                             <input type="radio" name="subcat" value="<?=$val['id']?>" class="subcat">
                             <?=$val['name']?>
                         </label>
-                    <?php endforeach; ?>  
+                    <?php endforeach; ?>
 
                 </div>
             </div>
@@ -109,10 +109,10 @@
         </div>
      
         <div class="content-nav padding-bottom-330">
-            <div class="content-nav-item opened">1</div>
+            <!-- <div class="content-nav-item opened">1</div>
             <div class="content-nav-item">2</div>
             <div class="content-nav-item">3</div>
-            <div class="content-nav-item">4</div>
+            <div class="content-nav-item">4</div> -->
         </div>
     
         <?php
