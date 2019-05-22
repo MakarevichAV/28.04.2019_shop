@@ -71,7 +71,7 @@ class Catalog {
             // 1. получить данные из атрибута data-id
             // 2. отправить их в файл addToCard.php
     }
-    renderPagination(allPages, currentPage) {   // метод для вывода кубиков пагинации  // подставляется количество кубиков и номер активного кубика
+    renderPagination(allPages, currentPage, catID) {   // метод для вывода кубиков пагинации  // подставляется количество кубиков и номер активного кубика
         // console.log(currentPage)
         let contentNav = document.querySelector('.content-nav');
         contentNav.innerHTML = '';
@@ -89,7 +89,7 @@ class Catalog {
 
             pageElement.addEventListener( 'click', function () {
                 let innerText = this.innerText;
-                catalog.renderCatalog( 1, innerText );
+                catalog.renderCatalog( catID, innerText );
             } );
             contentNav.appendChild(pageElement);
         }
@@ -139,7 +139,7 @@ class Catalog {
                 newCard.createCard();
             } );
             this.addToCard();
-            this.renderPagination(data.pagination.allPages, data.pagination.currentPage);
+            this.renderPagination(data.pagination.allPages, data.pagination.currentPage, subCatId);
             // console.log(data.pagination.currentPage);
         });
 
